@@ -17,6 +17,7 @@ module.exports = {
       },
     },
   ],
+  parse: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
