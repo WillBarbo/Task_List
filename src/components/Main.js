@@ -15,6 +15,22 @@ export default class Main extends Component {
     index: -1,
   };
 
+  componentDidMount() {
+    const tasks = JSON.parse(localStorage.getItem('tasks'));
+
+    if (!tasks) return;
+
+    this.setState({ tasks });
+  }
+
+  componentDidUpdate(prevState) {
+    const { tasks } = this.state;
+
+    if (tasks === prevState.tasks) return;
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { tasks, index } = this.state;
@@ -22,6 +38,7 @@ export default class Main extends Component {
     newTask = newTask.trim();
 
     if (tasks.indexOf(newTask) !== -1) return;
+    if (newTask === '') return;
 
     const newTasks = [...tasks];
 
